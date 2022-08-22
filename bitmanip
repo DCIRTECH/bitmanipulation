@@ -1,0 +1,960 @@
+	// 8n16n32 bit box manip.cpp : Defines the entry point for the console application.
+
+#include "stdafx.h"
+#include <conio.h>
+#include "c:\LccMetalBox\LccIo.cpp"
+#define DC_Max_len_line 80
+#define DC_SLEEP 500
+
+typedef struct
+{
+	char n_input[DC_Max_len_line];
+	int n_8_bit_LED;
+	int n_16_bit_LED;
+	int n_32_bit_LED;
+}LED;
+
+int Parse_CommandLine(LED*);
+void test(void);
+
+int main(void)
+{
+	LED I_O_Data;
+	LED *pStarter;
+	I_O_Data.n_8_bit_LED;
+	I_O_Data.n_16_bit_LED;
+	I_O_Data.n_32_bit_LED;
+	I_O_Data.n_input;
+	int exit = 0;
+	pStarter = &I_O_Data;
+	while (exit == 0)
+	{
+		printf("Please enter your command or run TEST\nWhen you are ready to leave enter 'EXIT'.\n");
+		gets_s(I_O_Data.n_input);
+		exit = Parse_CommandLine(pStarter);
+	}
+
+
+}//end main()
+int Parse_CommandLine(LED *pled)
+{
+	int exit = 0;
+	if (strstr(pled->n_input, "8_BIT_LED_0_ON") != NULL)
+	{
+		pled->n_8_bit_LED = pled->n_8_bit_LED | 0x01;
+		LccOutport(0x0300, ~pled->n_8_bit_LED);//write LED's
+	}
+	if (strstr(pled->n_input, "8_BIT_LED_0_OFF") != NULL)
+	{
+		pled->n_8_bit_LED = pled->n_8_bit_LED &~0x01;
+		LccOutport(0x0300, ~pled->n_8_bit_LED);//write LED's
+	}
+	if (strstr(pled->n_input, "8_BIT_LED_1_ON") != NULL)
+	{
+		pled->n_8_bit_LED = pled->n_8_bit_LED | 0x02;
+		LccOutport(0x0300, ~pled->n_8_bit_LED);//write LED's
+	}
+	if (strstr(pled->n_input, "8_BIT_LED_1_OFF") != NULL)
+	{
+		pled->n_8_bit_LED = pled->n_8_bit_LED &~0x02;
+		LccOutport(0x0300, ~pled->n_8_bit_LED);//write LED'
+	}
+	if (strstr(pled->n_input, "8_BIT_LED_2_OFF") != NULL)
+	{
+		pled->n_8_bit_LED = pled->n_8_bit_LED &~0x04;
+		LccOutport(0x0300, ~pled->n_8_bit_LED);//write LED'
+	}
+	if (strstr(pled->n_input, "8_BIT_LED_2_ON") != NULL)
+	{
+		pled->n_8_bit_LED = pled->n_8_bit_LED | 0x04;
+		LccOutport(0x0300, ~pled->n_8_bit_LED);//write LED's
+	}
+	if (strstr(pled->n_input, "8_BIT_LED_3_ON") != NULL)
+	{
+		pled->n_8_bit_LED = pled->n_8_bit_LED | 0x08;
+		LccOutport(0x0300, ~pled->n_8_bit_LED);//write LED's
+	}
+	if (strstr(pled->n_input, "8_BIT_LED_3_OFF") != NULL)
+	{
+		pled->n_8_bit_LED = pled->n_8_bit_LED &~0x08;
+		LccOutport(0x0300, ~pled->n_8_bit_LED);//write LED'
+	}
+	if (strstr(pled->n_input, "8_BIT_LED_4_ON") != NULL)
+	{
+		pled->n_8_bit_LED = pled->n_8_bit_LED | 0x10;
+		LccOutport(0x0300, ~pled->n_8_bit_LED);//write LED's
+	}
+	if (strstr(pled->n_input, "8_BIT_LED_4_OFF") != NULL)
+	{
+		pled->n_8_bit_LED = pled->n_8_bit_LED &~0x10;
+		LccOutport(0x0300, ~pled->n_8_bit_LED);//write LED'
+	}
+	if (strstr(pled->n_input, "8_BIT_LED_5_ON") != NULL)
+	{
+		pled->n_8_bit_LED = pled->n_8_bit_LED | 0x20;
+		LccOutport(0x0300, ~pled->n_8_bit_LED);//write LED's
+	}
+	if (strstr(pled->n_input, "8_BIT_LED_5_OFF") != NULL)
+	{
+		pled->n_8_bit_LED = pled->n_8_bit_LED &~0x20;
+		LccOutport(0x0300, ~pled->n_8_bit_LED);//write LED'
+	}
+	if (strstr(pled->n_input, "8_BIT_LED_6_ON") != NULL)
+	{
+		pled->n_8_bit_LED = pled->n_8_bit_LED | 0x40;
+		LccOutport(0x0300, ~pled->n_8_bit_LED);//write LED's
+	}
+	if (strstr(pled->n_input, "8_BIT_LED_6_OFF") != NULL)
+	{
+		pled->n_8_bit_LED = pled->n_8_bit_LED &~0x40;
+		LccOutport(0x0300, ~pled->n_8_bit_LED);//write LED'
+	}
+	if (strstr(pled->n_input, "8_BIT_LED_7_ON") != NULL)
+	{
+		pled->n_8_bit_LED = pled->n_8_bit_LED | 0x80;
+		LccOutport(0x0300, ~pled->n_8_bit_LED);//write LED's
+	}
+	if (strstr(pled->n_input, "8_BIT_LED_7_OFF") != NULL)
+	{
+		pled->n_8_bit_LED = pled->n_8_bit_LED &~0x80;
+		LccOutport(0x0300, ~pled->n_8_bit_LED);//write LED'
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_0_ON") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED | 0x0001;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_0_OFF") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED &~0x0001;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_1_ON") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED | 0x0002;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_1_OFF") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED &~0x0002;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_2_ON") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED | 0x0004;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_2_OFF") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED &~0x0004;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_3_ON") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED | 0x0008;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_3_OFF") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED &~0x0008;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_4_ON") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED | 0x0010;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_4_OFF") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED &~0x0010;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_5_ON") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED | 0x0020;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_5_OFF") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED &~0x0020;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_6_ON") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED | 0x0040;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_6_OFF") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED &~0x0040;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_7_ON") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED | 0x0080;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_7_OFF") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED &~0x0080;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_8_ON") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED | 0x0100;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_8_OFF") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED &~0x0100;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_9_ON") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED | 0x0200;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_9_OFF") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED &~0x0200;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_10_ON") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED | 0x0400;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_10_OFF") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED &~0x0400;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_11_ON") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED | 0x0800;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_11_OFF") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED &~0x0800;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_12_ON") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED | 0x1000;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_12_OFF") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED &~0x1000;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_13_ON") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED | 0x2000;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_13_OFF") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED &~0x2000;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_14_ON") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED | 0x4000;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_14_OFF") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED &~0x4000;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_15_ON") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED | 0x8000;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "16_BIT_LED_15_OFF") != NULL)
+	{
+		pled->n_16_bit_LED = pled->n_16_bit_LED &~0x8000;
+		LccOutport(0x1300, pled->n_16_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_0_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000000001;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_0_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000000001;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_1_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000000002;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_1_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000000002;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_2_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000000004;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_2_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000000004;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_3_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000000008;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_3_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000000008;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_4_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000000010;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_4_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000000010;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_5_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000000020;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_5_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000000020;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_6_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000000040;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_6_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000000040;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_7_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000000080;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_7_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000000080;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_8_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000000100;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_8_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000000100;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_9_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000000200;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_9_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000000200;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_10_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000000400;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_10_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000000400;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_11_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000000800;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_11_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000000800;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_12_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000001000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_12_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000001000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_13_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000002000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_13_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000002000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_14_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000004000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_14_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000004000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_15_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000008000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_15_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000008000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_16_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000010000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_16_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000010000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_17_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000020000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_17_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000020000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_18_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000040000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_18_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000040000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_19_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000080000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_19_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000080000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_20_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000100000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_20_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000100000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_21_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000200000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_21_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000200000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_22_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000400000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_22_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000400000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_23_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000000800000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_23_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000000800000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_24_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000001000000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_24_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000001000000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_25_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000002000000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_25_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000002000000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_26_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000004000000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_26_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000004000000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_27_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x0000000008000000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_27_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000008000000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_28_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x000000010000000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_28_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000010000000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_29_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x000000020000000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_29_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000020000000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_30_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x000000040000000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_30_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000040000000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_31_ON") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED | 0x000000080000000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "32_BIT_LED_31_OFF") != NULL)
+	{
+		pled->n_32_bit_LED = pled->n_32_bit_LED &~0x0000000080000000;
+		LccOutport(0x1302, pled->n_32_bit_LED);//write 16 bit Digital outputs
+	}
+	if (strstr(pled->n_input, "EXIT") != NULL)
+	{
+		exit = 1;
+	}
+
+
+		if (strstr(pled->n_input, "TEST") != NULL)
+		{
+			test();
+		}
+	return exit;
+}
+void test(void)
+{
+	LED Start;
+	Start.n_8_bit_LED = 0;
+	Start.n_16_bit_LED = 0;
+	Start.n_32_bit_LED = 0;
+
+
+strcpy_s(Start.n_input, "8_BIT_LED_0_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "8_BIT_LED_0_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "8_BIT_LED_1_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "8_BIT_LED_1_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "8_BIT_LED_2_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "8_BIT_LED_2_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "8_BIT_LED_3_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "8_BIT_LED_3_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "8_BIT_LED_4_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "8_BIT_LED_4_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "8_BIT_LED_5_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "8_BIT_LED_5_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "8_BIT_LED_6_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "8_BIT_LED_6_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "8_BIT_LED_7_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "8_BIT_LED_7_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_0_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_0_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_1_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_1_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_2_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_2_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_3_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_3_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_4_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_4_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_5_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_5_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_6_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_6_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_7_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_7_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_8_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_8_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_9_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_9_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_10_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_10_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_11_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_11_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_12_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_12_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_13_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_13_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_14_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_14_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_15_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "16_BIT_LED_15_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_0_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_0_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_1_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_1_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_2_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_2_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_3_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_3_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_4_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_4_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_5_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_5_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_6_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_6_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_7_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_7_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_8_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_8_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_9_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_9_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_10_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_10_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_11_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_11_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_12_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_12_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_13_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_13_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_14_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_14_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_15_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_15_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_16_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_16_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_17_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_17_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_18_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_18_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_19_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_19_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_20_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_20_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_21_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_21_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_22_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_22_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_23_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_23_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_24_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_24_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_25_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_25_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_26_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_26_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_27_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_27_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_28_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_28_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_29_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_29_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_30_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_30_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_31_ON");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+strcpy_s(Start.n_input, "32_BIT_LED_31_OFF");
+Parse_CommandLine(&Start);
+Sleep(DC_SLEEP);
+}
+//LccOutport(0x1305, ~sw);//write 16 bit Digital Outputs
+//LccOutport(0x1302, ~sw);//write 32 bit Digital Outputs
